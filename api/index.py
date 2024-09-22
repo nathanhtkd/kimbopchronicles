@@ -25,7 +25,7 @@ news_api_key = os.getenv("NEWS_API_KEY")
 summary_api_key = os.getenv("SUMMARY_API_KEY")
 suno_api_link = os.getenv("SUNO_API_LINK")
 
-top_k_articles = 1
+top_k_articles = 5
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -41,7 +41,7 @@ async def generate_audio_post(request: Request):
     data = await request.json()
     topics = data.get("topics")
     genre = str(data.get("genre"))
-    sentiment_preference = "neutral"
+    sentiment_preference = str(data.get("sentiment_preference"))
 
     if not isinstance(topics, list):
         topics = [topics]

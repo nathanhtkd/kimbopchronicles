@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import LoadingAnimation from "./loadinganimation"; 
-// import mockApiResponse from "@/components/test-data.json";
+import mockApiResponse from "@/components/test-data.json";
 
 interface AudioSummaryProps {
   setStep: (step: number) => void;
@@ -17,6 +17,7 @@ interface AudioSummaryProps {
 export default function AudioSummaryComponent({ setStep, selectedTopics, selectedGenre, setAudioData }: AudioSummaryProps) {
   const [selected, setSelected] = useState<string[]>(selectedTopics); // Track which topics are selected
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [sentiment, setSentiment] = useState<string>("neutral");
 
   const handleToggleTopic = (topic: string) => {
     setSelected((prevSelected) =>
@@ -40,7 +41,7 @@ export default function AudioSummaryComponent({ setStep, selectedTopics, selecte
         body: JSON.stringify({
           topics: selectedTopics,
           genre: selectedGenre, 
-          sentiment_preference: "positive",
+          sentiment_preference: sentiment,
         }),
       });
 
@@ -102,6 +103,59 @@ export default function AudioSummaryComponent({ setStep, selectedTopics, selecte
           ) : (
             <p className="text-gray-500 text-base italic">No genre selected</p>
           )}
+        </CardContent>
+
+        <CardContent className="mb-6">
+          <h3 className="text-lg font-semibold text-gray-800">Select Sentiment</h3>
+          <CardDescription className="text-sm text-gray-500 mt-2 mb-2">
+            Choose the type of sentiment you'd like to see reflected in your audio summary: positive, neutral, or negative.
+          </CardDescription>
+          <div className="flex gap-4">
+            <div className="flex items-center">
+              <input
+                type="radio"
+                id="positive"
+                name="sentiment"
+                value="positive"
+                checked={sentiment === "positive"}
+                onChange={() => setSentiment("positive")}
+                className="form-radio h-5 w-5 text-blue-600"
+              />
+              <label htmlFor="positive" className="ml-2 text-gray-700 text-lg">
+                Positive
+              </label>
+            </div>
+
+            <div className="flex items-center">
+              <input
+                type="radio"
+                id="neutral"
+                name="sentiment"
+                value="neutral"
+                checked={sentiment === "neutral"}
+                onChange={() => setSentiment("neutral")}
+                className="form-radio h-5 w-5 text-blue-600"
+              />
+              <label htmlFor="neutral" className="ml-2 text-gray-700 text-lg">
+                Neutral
+              </label>
+            </div>
+
+            <div className="flex items-center">
+              <input
+                type="radio"
+                id="negative"
+                name="sentiment"
+                value="negative"
+                checked={sentiment === "negative"}
+                onChange={() => setSentiment("negative")}
+                className="form-radio h-5 w-5 text-blue-600"
+              />
+              <label htmlFor="negative" className="ml-2 text-gray-700 text-lg">
+                Negative
+              </label>
+            </div>
+          </div>
         </CardContent>
   
         <CardFooter className="flex justify-between">
