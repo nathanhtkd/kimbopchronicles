@@ -1,41 +1,50 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import AudioSummaryComponent from "./audio-summary"
+import { useState, useEffect } from "react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
-export default function Onboarding() {
-  const [selectedTopics, setSelectedTopics] = useState<string[]>([])
-  const [step, setStep] = useState(1)
-  const [customTopic, setCustomTopic] = useState<string>("")
+
+interface OnboardingProps {
+  setStep: (step: number) => void;
+  selectedTopics?: string[];
+  setSelectedTopics: (topics: string[]) => void;
+}
+
+export default function Onboarding({ setStep, selectedTopics = [], setSelectedTopics }: OnboardingProps) {
+  const [customTopic, setCustomTopic] = useState<string>("");
 
   useEffect(() => {
-    console.log("Selected topics updated:", selectedTopics)
-  }, [selectedTopics])
-  
+    console.log("Selected topics updated:", selectedTopics);
+  }, [selectedTopics]);
+
   const handleTopicSelect = (topic: string) => {
     if (selectedTopics.includes(topic)) {
-      setSelectedTopics(selectedTopics.filter((t) => t !== topic))
+      setSelectedTopics(selectedTopics.filter((t) => t !== topic));
     } else {
-      setSelectedTopics([...selectedTopics, topic])
+      setSelectedTopics([...selectedTopics, topic]);
     }
-  }
+  };
+
   const handleContinue = () => {
     if (customTopic.trim() !== "") {
-      console.log("Custom topic:", customTopic.trim())
-      setSelectedTopics((prevTopics) => [...prevTopics, customTopic.trim()])
+      console.log("Custom topic:", customTopic.trim());
+      const newTopics = [...selectedTopics, customTopic.trim()]; // Directly create new array
+      setSelectedTopics(newTopics);
+      console.log("Selected topics:", newTopics);
     }
-
-    console.log("Continue clicked")
-    setCustomTopic("")
-    setStep(2)
-  }
+    setStep(2);
+  };
 
   return (
-    <div>
-      {step == 1 ? (
         <div>
           <Card className="mx-auto max-w-md">
             <CardHeader>
@@ -101,15 +110,9 @@ export default function Onboarding() {
           </CardFooter>
         </Card>
       </div>
-      ) : (
-        <div>
-          <AudioSummaryComponent selectedTopics={selectedTopics} />
-        </div>
-      )}
-    </div>
   )
 }
-
+// icons.tsx
 function BeakerIcon(props : React.SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -130,7 +133,6 @@ function BeakerIcon(props : React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
-
 
 function DollarSignIcon(props : React.SVGProps<SVGSVGElement>) {
   return (
@@ -199,7 +201,6 @@ function HeartIcon(props : React.SVGProps<SVGSVGElement>) {
   )
 }
 
-
 function LaptopIcon(props : React.SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -218,7 +219,6 @@ function LaptopIcon(props : React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
-
 
 function PodcastIcon(props : React.SVGProps<SVGSVGElement>) {
   return (

@@ -1,0 +1,10 @@
+{   
+    "topic": "technology",
+    "lyrics": "These are some sample lyrics about technology.",
+    "audioUrl": "https://samplelib.com/lib/preview/mp3/sample-3s.mp3",
+    "articleLinks": [
+        "https://example.com/technology-article",
+        "https://example.com/technology-article-2"
+    ],
+    "imgUrl": "https://via.placeholder.com/150"
+}
