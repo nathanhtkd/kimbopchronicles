@@ -27,7 +27,7 @@ export default function TitlePage({ setStep }: TitlePageProps) {
   }, []);
 
   return (
-    <Card className="mx-auto max-w-xl p-6">
+    <Card className="mx-auto max-w-xl p-6 bg-white">
       <CardHeader className="text-center">
         <CardTitle className="text-5xl font-extrabold mb-6 bg-gradient-to-r from-gray-400 to-gray-700 text-transparent bg-clip-text">
           Welcome to KimBOP Chronicles!

@@ -1,18 +1,21 @@
-import { useState } from "react";
+"use client";
+
+import { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import LoadingAnimation from "./loadinganimation"; 
+import mockApiResponse from "@/components/test-data.json";
 
 interface AudioSummaryProps {
   setStep: (step: number) => void;
   selectedTopics: string[];
   selectedGenre: string;
+  setAudioData: (data: any[]) => void;
 }
 
-export default function AudioSummaryComponent({ setStep, selectedTopics, selectedGenre }: AudioSummaryProps) {
+export default function AudioSummaryComponent({ setStep, selectedTopics, selectedGenre, setAudioData }: AudioSummaryProps) {
   const [selected, setSelected] = useState<string[]>(selectedTopics); // Track which topics are selected
-  const [audioData, setAudioData] = useState<any[]>([]); // Store audio data
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleToggleTopic = (topic: string) => {
@@ -30,18 +33,10 @@ export default function AudioSummaryComponent({ setStep, selectedTopics, selecte
       console.log("Fetching audio...");
 
       // Simulate a 5-second delay
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const response = await fetch("/api/py/generate_audio", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ selectedTopics: selected, selectedGenre }), // Send updated topics
-      });
-      const data = await response.json();
-      console.log("Audio data:", data);
-      setAudioData(data.data);
+      setAudioData(mockApiResponse);
+      setStep(4);
     } catch (error) {
       console.error("Error fetching audio:", error);
     }
@@ -53,77 +48,66 @@ export default function AudioSummaryComponent({ setStep, selectedTopics, selecte
     <>
       {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-md shadow-lg flex items-center flex-col">
+          <div className="bg-white p-8 rounded-md shadow-lg flex items-center flex-col">
             <span className="text-lg font-semibold mb-4">Generating...</span>
             <LoadingAnimation />
           </div>
         </div>
       )}
-
-      <Card className="mx-auto max-w-md">
-        <CardHeader>
-          <CardTitle>Selected Topics</CardTitle>
-          <CardDescription>Select or deselect the topics for which you want to generate an audio summary.</CardDescription>
+  
+      <Card className="mx-auto max-w-xl bg-white shadow-xl rounded-lg border border-gray-200 p-6">
+        <CardHeader className="mb-4">
+          <CardTitle className="text-3xl font-bold text-gray-800">Selected Topics</CardTitle>
+          <CardDescription className="text-sm text-gray-500 mt-2">
+            Select or deselect the topics for which you want to generate an audio summary.
+          </CardDescription>
         </CardHeader>
 
-        <CardContent className="grid gap-2">
+        <CardContent className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
           {selectedTopics.map((topic, index) => (
             <div key={index} className="flex items-center gap-2">
               <Checkbox
                 checked={selected.includes(topic)}
                 onCheckedChange={() => handleToggleTopic(topic)} // Update selected topics
                 id={topic}
+                className="form-checkbox h-5 w-5 text-blue-600"
               />
-              <label htmlFor={topic} className="text-gray-700">
+              <label htmlFor={topic} className="text-gray-700 text-lg">
                 {topic}
               </label>
             </div>
           ))}
         </CardContent>
-
-        <CardContent>
-          <h3 className="text-lg font-semibold">Selected Genre</h3>
+  
+        <CardContent className="mb-6">
+          <h3 className="text-lg font-semibold text-gray-800">Selected Genre</h3>
           {selectedGenre ? (
-            <p className="text-gray-600 mb-4">{selectedGenre}</p>
+            <p className="text-gray-600 text-base">{selectedGenre}</p>
           ) : (
-            <p className="text-gray-600 mb-4">No genre selected</p>
+            <p className="text-gray-500 text-base italic">No genre selected</p>
           )}
         </CardContent>
-
+  
         <CardFooter className="flex justify-between">
-          <Button onClick={() => setStep(2)}>Back</Button>
-          <Button onClick={handleFetchAudio} disabled={isLoading || selected.length === 0}>
+          <Button
+            onClick={() => setStep(2)}
+            >
+            Back
+          </Button>
+          <Button
+            onClick={handleFetchAudio}
+            disabled={isLoading || selected.length === 0}
+            className={`px-6 py-2 rounded-md ${
+              selected.length === 0
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : ""
+            }`}
+          >
             Generate
           </Button>
         </CardFooter>
-
-        {audioData.length > 0 && (
-          <CardContent className="mt-8">
-            <CardTitle className="text-center text-2xl font-bold mb-6">Audio Feed</CardTitle>
-            <div className="grid gap-6">
-              {audioData.map((audio, index) => (
-                <div key={index} className="bg-white shadow-lg rounded-md p-6 flex flex-col items-center">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">{audio.topic}</h3>
-                  <img
-                    src={audio.imgUrl}
-                    alt={`${audio.topic} related image`}
-                    className="mb-4 rounded-md w-full object-cover max-h-48"
-                  />
-                  <p className="mb-4 text-gray-600 text-center">{audio.lyrics}</p>
-                  <audio controls src={audio.mp3} className="mb-4 w-full" />
-                  <div className="w-full">
-                    {audio.articleLink?.map((link: string, linkIndex: number) => (
-                      <a key={linkIndex} href={link} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline block mb-2 text-center">
-                        Read More {linkIndex + 1}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        )}
       </Card>
     </>
   );
+  
 }

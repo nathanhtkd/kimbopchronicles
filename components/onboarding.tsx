@@ -46,7 +46,7 @@ export default function Onboarding({ setStep, selectedTopics = [], setSelectedTo
 
   return (
         <div>
-          <Card className="mx-auto max-w-md">
+          <Card className="mx-auto max-w-md bg-white">
             <CardHeader>
             <CardTitle>What topics interest you?</CardTitle>
             <CardDescription>Select the news categories you'd like to receive in your daily audio digest.</CardDescription>

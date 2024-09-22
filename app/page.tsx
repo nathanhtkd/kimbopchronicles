@@ -6,11 +6,13 @@ import TitlePage from "@/components/title-page";
 import Onboarding from "@/components/onboarding";
 import GenreSelect from "@/components/genre-select";
 import AudioSummary from "@/components/audio-summary";
+import AudioFeed from "@/components/audio-feed";
 
 export default function Home() {
   const [step, setStep] = useState(0); // Start with step 0 for TitlePage
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<string>("");
+  const [audioData, setAudioData] = useState<any[]>([]);
 
   const handleStepChange = (newStep: number) => {
     setStep(newStep);
@@ -19,9 +21,7 @@ export default function Home() {
   const renderStep = () => {
     switch (step) {
       case 0:
-        return (
-          <TitlePage setStep={(newStep) => handleStepChange(newStep)} />
-        );
+        return <TitlePage setStep={(newStep) => handleStepChange(newStep)} />;
       case 1:
         return (
           <Onboarding
@@ -44,7 +44,17 @@ export default function Home() {
             setStep={(newStep) => handleStepChange(newStep)}
             selectedTopics={selectedTopics}
             selectedGenre={selectedGenre}
+            setAudioData={setAudioData}
           />
+        );
+      case 4:
+        return audioData.length > 0 ? (
+          <AudioFeed
+            setStep={(newStep) => handleStepChange(newStep)}
+            audioData={audioData}
+          />
+        ) : (
+          <div className="text-center text-gray-500">No audio data available</div>
         );
       default:
         return <TitlePage setStep={(newStep) => handleStepChange(newStep)} />;
