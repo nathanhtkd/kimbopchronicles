@@ -21,7 +21,7 @@ const LoadingAnimation = () => {
   return (
     <div
       ref={animationContainer}
-      style={{ width: 100, height: 100 }} // Adjust size based on your needs
+      style={{ width: 150, height: 150 }}
     ></div>
   );
 };

@@ -29,7 +29,9 @@ export default function TitlePage({ setStep }: TitlePageProps) {
   return (
     <Card className="mx-auto max-w-xl p-6">
       <CardHeader className="text-center">
-        <CardTitle className="text-4xl font-bold mb-2">Welcome to KimBOP Chronicles</CardTitle>
+        <CardTitle className="text-5xl font-extrabold mb-6 bg-gradient-to-r from-gray-400 to-gray-700 text-transparent bg-clip-text">
+          Welcome to KimBOP Chronicles!
+        </CardTitle>
         <p className="text-gray-600 text-lg">
           A fun, fresh way to get your personalized daily audio summaries. Just like Kimbap, we wrap up your favorite news and serve it with a dash of flavor!
         </p>
