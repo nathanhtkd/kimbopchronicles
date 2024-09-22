@@ -105,7 +105,10 @@ export default function Onboarding({ setStep, selectedTopics = [], setSelectedTo
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-end">
+          <CardFooter className="flex justify-between">
+            <Button onClick={() => setStep(0)}>
+              Back
+            </Button>
             <Button type="submit" onClick={handleContinue}>Continue</Button>
           </CardFooter>
         </Card>

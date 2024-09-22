@@ -39,7 +39,7 @@ const mockFetchFromBackend = async (): Promise<any> => {
   });
 };
 
-export default function AudioSummaryComponent({ setStep,selectedTopics, selectedGenre }: AudioSummaryProps) {
+export default function AudioSummaryComponent({ setStep, selectedTopics, selectedGenre }: AudioSummaryProps) {
   const [selected, setSelected] = useState<string[]>(selectedTopics) // Track which topics are selected
   const [audioData, setAudioData] = useState<any[]>([]) // Store audio data
   const [isLoading, setIsLoading] = useState<boolean>(false)

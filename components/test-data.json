@@ -6,5 +6,9 @@
         "https://example.com/technology-article",
         "https://example.com/technology-article-2"
     ],
+    "articleTitles": [
+        "Technology Article 1",
+        "Technology Article 2"
+    ],
     "imgUrl": "https://via.placeholder.com/150"
 }
