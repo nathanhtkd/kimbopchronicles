@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import LoadingAnimation from "./loadinganimation"; 
-import mockApiResponse from "@/components/test-data.json";
+// import mockApiResponse from "@/components/test-data.json";
 
 interface AudioSummaryProps {
   setStep: (step: number) => void;
@@ -32,10 +32,26 @@ export default function AudioSummaryComponent({ setStep, selectedTopics, selecte
     try {
       console.log("Fetching audio...");
 
-      // Simulate a 5-second delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch("/api/helloNextJs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          topics: selectedTopics,
+          genre: selectedGenre, 
+          sentiment_preference: "positive",
+        }),
+      });
 
-      setAudioData(mockApiResponse);
+      const data = await response.json();
+      console.log(data);
+
+      setAudioData(data.data);
+
+      // console.log(mockApiResponse)
+      // setAudioData(mockApiResponse.data);
+
       setStep(4);
     } catch (error) {
       console.error("Error fetching audio:", error);

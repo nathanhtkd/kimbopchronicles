@@ -15,7 +15,7 @@ export default function AudioCard({ audio, onLyricsClick }: AudioCardProps) {
     >
       <h3 className="text-xl font-bold text-gray-800 mb-2">{audio.topic}</h3>
       <img
-        src={audio.imgUrl}
+        src={audio.avatar_image_url}
         alt={`${audio.topic} related image`}
         className="mb-4 rounded-md object-cover w-[360px] h-[360px] shadow-md border border-gray-200"
       />
@@ -28,18 +28,18 @@ export default function AudioCard({ audio, onLyricsClick }: AudioCardProps) {
         </p>
       </div>
 
-      <audio controls src={audio.audioUrl} className="mb-4 w-full rounded-lg border-blue-200" />
+      <audio controls src={audio.audio_url} className="mb-4 w-full rounded-lg border-blue-200" />
 
       <div className="w-full">
-        {audio.articleLinks.map((link: string, linkIndex: number) => (
+        {audio.news_sources.map((linkObj: any, linkIndex: number) => (
           <a
             key={linkIndex}
-            href={link}
+            href={linkObj.url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-500 hover:underline transition duration-150 ease-in-out block mb-2 text-center text-sm font-semibold"
           >
-            {audio.articleTitles[linkIndex]}
+            {linkObj.title}
           </a>
         ))}
       </div>

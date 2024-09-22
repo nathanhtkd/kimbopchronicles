@@ -1,52 +1,38 @@
-[
+{
+    "status": "success",
+    "data": [
     {   
         "topic": "technology",
-        "lyrics": "These are some sample lyrics about technology. These are some sample lyrics about technology. These are some sample lyrics about technology. These are some sample lyrics about technology. These are some sample lyrics about technology. These are some sample lyrics about technology. These are some sample lyrics about technology. These are some sample lyrics about technology. These are some sample lyrics about technology. These are some sample lyrics about technology. These are some sample lyrics about technology.",
-        "audioUrl": "https://samplelib.com/lib/preview/mp3/sample-3s.mp3",
-        "articleLinks": [
-            "https://example.com/technology-article",
-            "https://example.com/technology-article-2",
-            "https://example.com/technology-article",
-            "https://example.com/technology-article-2",
-            "https://example.com/technology-article",
-            "https://example.com/technology-article-2"
+        "lyrics": "Say, say it You do this all the time No sense in holding back tonight Can't contain it Even if I tried Get lost in the moment Get lost with you, but I Can't read your mind When all you do is dance on the line Can't read your mind All I need is a sign Say the word I know what you're thinking, but just say it first Been waiting all this time for you to take your turn In my arms for a second Baby, say the word, and I'll be yours The look you're giving me gives you away You finally found the high that you've been chasing Only one more choice you got to make I need you to tell me 'cause I Can't read your mind All I need is a sign Say the word I know what you're thinking, but just say it first Been waiting all this time for you to take your turn In my arms for a second Baby, say the word, and I'll be yours So close to your body, can you feel it? Come and spend the night with someone new Talking with your hands, but do you mean it? Baby, all you gotta do is Say the word I know what you're thinking, but just say it first Been waiting all this time for you to take your turn (yeah) In my arms for a second Baby, say the word, and I'll be yours Say the word (yeah) I know what you're thinking, but just say it first Been waiting all this time for you to take your turn (yeah) In my arms for a second Baby, say the word, and I'll be yours (yeah) Say the word",
+        "audio_url": "https://samplelib.com/lib/preview/mp3/sample-3s.mp3",
+        "news_sources": [
+            {
+                "title": "Tech News 1",
+                "url": "https://example.com/tech-news-1"
+            },
+            {
+                "title": "Tech News 2",
+                "url": "https://example.com/tech-news-2"
+            }
         ],
-        "articleTitles": [
-            "Technology Article 1",
-            "Technology Article 2",
-            "Technology Article 3",
-            "Technology Article 4",
-            "Technology Article 5",
-            "Technology Article 6"
-        ],
-        "imgUrl": "https://via.placeholder.com/150"
+        
+        "avatar_image_url": "https://via.placeholder.com/150"
     },
     {
         "topic": "education",
         "lyrics": "These are some sample lyrics about education.",
-        "audioUrl": "https://samplelib.com/lib/preview/mp3/sample-3s.mp3",
-        "articleLinks": [
-            "https://example.com/education-article",
-            "https://example.com/education-article-2"
+        "audio_url": "https://samplelib.com/lib/preview/mp3/sample-3s.mp3",
+        "news_sources": [
+            {
+                "title": "Education Article 1",
+                "url": "https://example.com/education-article-1"
+            },
+            {
+                "title": "Education Article 2",
+                "url": "https://example.com/education-article-2"
+            }
         ],
-        "articleTitles": [
-            "Education Article 1",
-            "Education Article 2"
-        ],
-        "imgUrl": "https://via.placeholder.com/150"
-    },
-    {
-        "topic": "finance",
-        "lyrics": "These are some sample lyrics about finance.",
-        "audioUrl": "https://samplelib.com/lib/preview/mp3/sample-3s.mp3",
-        "articleLinks": [
-            "https://example.com/finance-article",
-            "https://example.com/finance-article-2"
-        ],
-        "articleTitles": [
-            "Finance Article 1",
-            "Finance Article 2"
-        ],
-        "imgUrl": "https://via.placeholder.com/150"
+        "avatar_image_url": "https://via.placeholder.com/150"
     }
-]
+    ]
+}
