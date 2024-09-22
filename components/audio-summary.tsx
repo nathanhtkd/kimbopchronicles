@@ -56,12 +56,29 @@ export default function AudioSummaryComponent({ setStep,selectedTopics, selected
     setIsLoading(true)
 
     try {
-      // Simulate a call to the backend (replace this with your actual fetch logic)
-      const data = await mockFetchFromBackend();
-      setAudioData(data.data);  // Set the mocked data returned from the backend
+      console.log("Fetching audio...")
+      const response = await fetch("/api/py/generate_audio", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ selectedTopics, selectedGenre }),
+      });
+      const data = await response.json();
+      console.log("Audio data:", data)
+      setAudioData(data.data);
     } catch (error) {
       console.error("Error fetching audio:", error)
     }
+    // MOCK DATA
+    // try {
+    //   const data = await mockFetchFromBackend();
+    //   setAudioData(data.data); 
+    // } catch (error) {
+    //   console.error("Error fetching audio:", error)
+    // }
+    // END MOCK DATA
+
     setIsLoading(false)
   }
 

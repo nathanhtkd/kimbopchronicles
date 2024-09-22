@@ -13,7 +13,7 @@ app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
 
 @app.get("/api/py/generate_audio")
 async def generate_audio_get(request: Request):
-    return {"message": "Hello World"}
+    return {"message": "Testing FastAPI endpoint"}
     
     # SAMPLE
 # POST endpoint to receive topics from client
@@ -21,18 +21,23 @@ async def generate_audio_get(request: Request):
 async def generate_audio_post(request: Request):
     data = await request.json()
     topics = data.get("selectedTopics")
+    genre = data.get("selectedGenre")
     
     if not topics:
         return {"status": "error", "message": "No topics provided"}
+    if not genre:
+        return {"status": "error", "message": "No genre provided"}
     
-    # SAMPLE
-    lyrics = "Sample lyrics"  # You can map this from the topic or data provided
-    genre = "pop"  # You can customize this based on the topic
-    title = "Generated Song"
+    return {"status": "success", "data": {"topics": topics, "genre": genre}}
 
-    song_data = await generate_song(lyrics=lyrics, genre=genre, title=title, wait_audio=True)
+    # # SAMPLE
+    # lyrics = "Sample lyrics"  # You can map this from the topic or data provided
+    # genre = "pop"  # You can customize this based on the topic
+    # title = "Generated Song"
 
-    return {"topics": topics, "song_data": song_data}
+    # song_data = await generate_song(lyrics=lyrics, genre=genre, title=title, wait_audio=True)
+
+    # return {"topics": topics, "song_data": song_data}
 
 # Function to call Vercel API to generate music
 async def generate_song(lyrics: str, genre: str, title: str, wait_audio: bool = False):
